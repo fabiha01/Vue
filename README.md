@@ -1,2 +1,2 @@
-# react
-learning React
+# React/Vue
+learning React/Vue
