@@ -1,0 +1,19 @@
+.strikeout {
+    text-decoration: line-through;
+    color: #B8C2CC;
+}
+
+li, p {
+    display: flex;
+    align-items: center;
+    line-height: 1.75;
+    letter-spacing: .5px;
+    color: #3D4852;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all .1s ease-in;
+}
+
+.priority {
+    color: #DE751F;
+}
