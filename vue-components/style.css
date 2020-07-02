@@ -1,0 +1,45 @@
+body {
+    height: 100vh;
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: atialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: Roboto, sans-serif;
+    background-color: #ccdcdc;
+}
+
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+h1.title {
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: #2d3336;
+}
+
+h2.subtitle {
+    margin: .7rem auto;
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 1.5;
+    letter-spacing: 0;
+    max-width: 500px;
+    color: #5c6162;
+}
+
+.plans {
+    padding: 0.40px;
+    margin-bottom: 40px;
+}
+
+.plans .plan {
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+}
