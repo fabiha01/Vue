@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue from Scratch</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in items">
+                {{ item.text }}
+                <div v-if="item.checked">Checked!</div>
+
+                <button @click="item.checked = ! item.checked">Toggle</button>
+            </li>
+        </ul>
+    </div>
+
+    <div id="news-app">
+        <ul>
+            <li v-for="news in headlines">
+                {{ news.text }}
+
+                <div v-if="news.checked">{{ news.content }}</div>
+                <button @click="news.checked = ! news.checked">>></button>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                items: [
+                    { text: 'item 1', checked: true },
+                    { text: 'item 2', checked: true },
+                    { text: 'item 3', checked: false }
+                ]
+            }
+        });
+
+        new Vue({
+            el: '#news-app',
+            data: {
+                headlines: [
+                    { text: 'Breaking News', content: 'PM has just announced more European countries exempt from quarantine rules', checked: true },
+                    { text: 'Local News', content: 'People in the North East have finally begun to follow road rules!', checked: false },
+                    { text: 'National News', content: 'UK will provide citizenship to HK nationals - yet people are still told to go home??', checked: true }
+                ]
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
