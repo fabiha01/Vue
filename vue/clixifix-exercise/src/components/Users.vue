@@ -1,61 +1,66 @@
 <template>
     <div id="users">
-        <p v-if="users.length < 1" class="empty-table">No Users</p>
-        <table v-else>
-            <thead>
-                <tr>
-                    <th>Users name</th>
-                    <th>Tasks</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="user in users" :key="user.id">
-                    <td v-if="editing === user.id"><input type="text" v-model="user.name"/></td>
-                    <td v-else>{{ user.name }}</td>
-                    <td><button @click="getUserTodo(user.id)">{{ user.name }}</button></td>
-                    <td v-if="editing === user.id">
-                        <button @click="editUser(user)">Save</button>
-                        <button class="muted-button" @click="editing = null">Cancel</button>
-                    </td>
-                    <td v-else>
-                        <button @click="editMode(user.id)">Edit</button>
-                        <button @click="$emit('delete:user', user.id)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <v-row>
+            <v-col cols="3">
+                <!-- display a message on the screen if there are no users -->
+                <p v-if="users.length < 1" class="empty-table">No Users</p>
+            </v-col>
+            <v-col cols="6">
+                <v-list subheader>
+                    <v-subheader>Users</v-subheader>
+                    <!-- loop through users to display them in a list -->
+                    <template v-for="(user, index) in users">
+                        <v-list-item
+                        :key="index">                            
+                            <v-list-item-content>
+                                <v-list-item-title v-text="user.name" @click="showTasks(user)"></v-list-item-title>
+                                <!-- <v-btn @click="showTasks(user)">Show To do's</v-btn> -->
+                            </v-list-item-content>
+                        </v-list-item>
+                    </template>                    
+                    </v-list>
+                    <!-- this will show the todo's in a dialog box once a user has been clicked -->
+                    <v-dialog v-model="showTodos">
+                          <v-card>
+                            <v-card-title>{{ selectedUser.name }}</v-card-title>
+                            <!-- only show the todos for selctedUser -->
+                            <v-card-text><user-todo v-if="showTodos" :user="selectedUser" /></v-card-text>
+                        </v-card>
+                    </v-dialog>
+            </v-col>
+        </v-row>
     </div>
     
 </template>
 
 <script>
 import axios from 'axios';
+import UserTodo from './UserTodo.vue';
 
 export default {
     name: 'users',
-    props: {
-        users: Array
+    components: {
+        UserTodo // we need to import todos
     },
     data() {
         return {
-            editing: null
+            selectedId: null,
+            users: [],
+            showTodos: false,
+            selectedUser: {}
         }
     },
     methods: {
-        editMode(id) {
-            this.editing = id
-        },
-        editUser(user) {
-            if (user.name === '' || user.todo === '') return
-            this.$emit('edit:user', user.id, user)
-            this.editing = null
-        },
-        getUserTodo(userID) {
-        axios.get("https://jsonplaceholder.typicode.com/users/" + userID + "/todos")
-        .then(response => alert(response.data));
+        showTasks(user) {
+            this.selectedUser = user
+            this.showTodos = true
         }
-    }
+
+    },
+    mounted() {
+        axios.get('https://jsonplaceholder.typicode.com/users')
+        .then(response => this.users = response.data);
+    },
 }
 </script>
 
@@ -63,5 +68,4 @@ export default {
     button {
         margin: 0 0.5rem 0 0;
     }
-
 </style>

@@ -1,13 +1,21 @@
 <template>
   <div id="user-form">
     <form @submit.prevent="handleSubmit">
-      <label>Users name: </label>
-      <input type="text" ref="first" :class="{ 'has-error': submitting && invalidName }" v-model="user.name" @focus="clearStatus" @keypress="clearStatus" />
-      <label>Users Todo: </label>
-      <input :class="{ 'has-error': submitting && invalidTodo }" v-model="user.todo" @focus="clearStatus" type="text" />
-      <p v-if="error && submitting" class="error-message">Please fill out all required fields</p>
-      <p v-if="success" class="success-message">Todo successfully added</p>
-      <button>Add Todo</button>
+        <v-row>
+        <v-col cols="4">
+            <label>Users name: </label>
+      <v-text-field outlined type="text" ref="first" :class="{ 'has-error': submitting && invalidName }" v-model="user.name" @focus="clearStatus" @keypress="clearStatus"></v-text-field>
+        </v-col>
+
+        <v-col cols="4">
+            <br />
+        <p v-if="error && submitting" class="error-message">Please fill out all required fields</p>
+        <p v-if="success" class="success-message">Todo successfully added</p>
+        <v-btn>Add User</v-btn>
+        </v-col>
+        </v-row>
+
+      
     </form>
   </div>    
 </template>
@@ -33,12 +41,6 @@ export default {
             if (this.invalidName || this.invalidTodo) {
                 this.error = true
                 return
-            }
-            this.$emit('add:user', this.user);
-            this.$refs.first.focus()
-            this.user = {
-                name: '',
-                todo: '',
             }
             this.error = false
             this.success = true
