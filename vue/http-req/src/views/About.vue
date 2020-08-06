@@ -1,5 +1,18 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <v-main>
+    <grid-table></grid-table>
+    </v-main>
   </div>
 </template>
+
+<script>
+import GridTable from '../components/GridTable.vue'
+export default {
+
+  components: {
+    GridTable
+  }
+  
+}
+</script>
