@@ -2,16 +2,19 @@
   <div id="app">
     <input type="text">
     <users my-name="Fabiha"/>
+    <grid-table></grid-table>
   </div>
 </template>
 
 <script>
 import Users from './components/UsersList.vue'
+import GridTable from './components/GridTable'
 
 export default {
   name: 'App',
   components: {
-    Users
+    Users,
+    GridTable
   },
   data() {
     return {
