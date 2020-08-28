@@ -3,23 +3,34 @@
         <h1 class="subheading">Dashboard</h1>
 
         <v-container class="my-5">
+
+            <v-layout row class="mb-3">
+                <v-btn small color="grey button">
+                    <v-icon left small >folder</v-icon>
+                    <span class="caption text--lowercase">By project name</span>
+                </v-btn>
+
+            </v-layout>
+
+
             <v-card flat v-for="project in projects" :key="project.title">
                 <v-layout row wrap :class="`pa-3 project ${project.status}`">
-                    <v-flex xs12 md6>
+                    <v-flex xs12 md3>
                         <div class="caption">Project Title</div>
                         <div>{{project.title}}</div>
                     </v-flex>
-                    <v-flex xs6 sm4 md2>
+                    <v-flex xs6 sm4 md3>
                         <div class="caption">Person</div>
                         <div>{{project.person}}</div>
                     </v-flex>
-                    <v-flex xs6 sm4 md2>
+                    <v-flex xs6 sm4 md3>
                         <div class="caption">Due By</div>
                         <div>{{project.due}}</div>
                     </v-flex>
-                    <v-flex xs2 sm4 md2>
-                        <div class="caption">Status</div>
-                        <div>{{project.status}}</div>
+                    <v-flex xs2 sm4 md3>
+                        <div class="right">
+                            <v-chip small :class="`${project.status} white--text caption my-2`">{{project.status}}</v-chip>
+                            </div>
                     </v-flex>
                 </v-layout>
             <v-divider></v-divider>
@@ -56,6 +67,22 @@ export default {
 
 .project.overdue{
     border-left: 4px solid tomato;
+}
+
+.v-chip.complete{
+    background: #3cd1c2 !important;
+}
+
+.v-chip.ongoing{
+    background: #ffaa2c !important;
+}
+
+.v-chip.overdue{
+    background: #f83e70 !important;
+}
+
+.button{
+    text-transform: lowercase !important;
 }
 
 </style>
